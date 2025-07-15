@@ -1,8 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Icon from '../../../components/AppIcon';
 import Image from '../../../components/AppImage';
 
 const HeroSection = () => {
+  const [language, setLanguage] = useState('EN');
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem('language');
+    if (storedLang) {
+      setLanguage(storedLang);
+    }
+  }, []);
+
+  const content = {
+    EN: {
+      title: 'Italian Culture Corner',
+      subtitle: 'Dove la tradizione incontra la passione',
+      paragraph:
+        'Immerse yourself in the rich tapestry of Italian culture, from ancient traditions to modern celebrations. Discover the stories behind every dish, the heritage of every ingredient, and the passion that defines la dolce vita.',
+      updated: 'Updated Weekly',
+      community: 'Community Stories',
+      insights: 'Authentic Insights',
+    },
+    DE: {
+      title: 'Italienische Kultur-Ecke',
+      subtitle: 'Wo Tradition auf Leidenschaft trifft',
+      paragraph:
+        'Tauchen Sie ein in das reiche Gefüge der italienischen Kultur – von alten Traditionen bis zu modernen Feiern. Entdecken Sie die Geschichten hinter jedem Gericht, das Erbe jedes Zutats und die Leidenschaft, die „la dolce vita“ definiert.',
+      updated: 'Wöchentlich aktualisiert',
+      community: 'Gemeinschaftsgeschichten',
+      insights: 'Authentische Einblicke',
+    },
+  };
+
+  const t = content[language] || content.EN;
+
   return (
     <section className="relative min-h-[60vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-hero">
       <div className="absolute inset-0">
@@ -13,7 +45,7 @@ const HeroSection = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
       </div>
-      
+
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <div className="flex items-center justify-center mb-6">
           <Icon name="BookOpen" size={48} className="text-golden mr-4" />
@@ -22,38 +54,35 @@ const HeroSection = () => {
           <div className="w-16 h-0.5 bg-golden"></div>
           <Icon name="Grape" size={48} className="text-golden ml-4" />
         </div>
-        
+
         <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 text-shadow-warm">
-          Italian Culture Corner
+          {t.title}
         </h1>
-        
-        <p className="font-dancing text-xl md:text-2xl text-golden mb-8">
-          Dove la tradizione incontra la passione
-        </p>
-        
+
+        <p className="font-dancing text-xl md:text-2xl text-golden mb-8">{t.subtitle}</p>
+
         <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed mb-8">
-          Immerse yourself in the rich tapestry of Italian culture, from ancient traditions to modern celebrations. 
-          Discover the stories behind every dish, the heritage of every ingredient, and the passion that defines la dolce vita.
+          {t.paragraph}
         </p>
-        
+
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <div className="flex items-center text-white/80">
             <Icon name="Calendar" size={20} className="mr-2" />
-            <span className="text-sm">Updated Weekly</span>
+            <span className="text-sm">{t.updated}</span>
           </div>
           <div className="hidden sm:block w-1 h-1 bg-white/40 rounded-full"></div>
           <div className="flex items-center text-white/80">
             <Icon name="Users" size={20} className="mr-2" />
-            <span className="text-sm">Community Stories</span>
+            <span className="text-sm">{t.community}</span>
           </div>
           <div className="hidden sm:block w-1 h-1 bg-white/40 rounded-full"></div>
           <div className="flex items-center text-white/80">
             <Icon name="Globe" size={20} className="mr-2" />
-            <span className="text-sm">Authentic Insights</span>
+            <span className="text-sm">{t.insights}</span>
           </div>
         </div>
       </div>
-      
+
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-gentle-bounce">
         <Icon name="ChevronDown" size={32} className="text-white/60" />
       </div>

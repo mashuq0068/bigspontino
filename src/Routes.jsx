@@ -8,8 +8,8 @@ import ItalianCultureCorner from "pages/italian-culture-corner";
 import MenuExperience from "pages/menu-experience";
 import ContactLocation from "pages/contact-location";
 import OurStoryUniverse from "pages/our-story-universe";
-import ReservationExperience from "pages/reservation-experience";
 import NotFound from "pages/NotFound";
+import ReservationExperience from "pages/reservation-experience";
 
 const Routes = () => {
   return (
@@ -25,6 +25,7 @@ const Routes = () => {
         <Route path="/contact-location" element={<ContactLocation />} />
         <Route path="/our-story-universe" element={<OurStoryUniverse />} />
         <Route path="/reservation-experience" element={<ReservationExperience />} />
+      
         <Route path="*" element={<NotFound />} />
       </RouterRoutes>
       </ErrorBoundary>

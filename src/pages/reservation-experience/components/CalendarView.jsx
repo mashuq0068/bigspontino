@@ -1,14 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 
 const CalendarView = ({ selectedDate, onDateSelect, availabilityData }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [language, setLanguage] = useState('EN');
 
-  const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
+  useEffect(() => {
+    const lang = localStorage.getItem('language') || 'EN';
+    setLanguage(lang);
+  }, []);
+
+  const monthNames = {
+    EN: [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ],
+    DE: [
+      "Januar", "Februar", "März", "April", "Mai", "Juni",
+      "Juli", "August", "September", "Oktober", "November", "Dezember"
+    ]
+  };
+
+  const weekdayNames = {
+    EN: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    DE: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa']
+  };
 
   const getDaysInMonth = (date) => {
     const year = date.getFullYear();
@@ -19,17 +36,15 @@ const CalendarView = ({ selectedDate, onDateSelect, availabilityData }) => {
     const startingDayOfWeek = firstDay.getDay();
 
     const days = [];
-    
-    // Add empty cells for days before the first day of the month
+
     for (let i = 0; i < startingDayOfWeek; i++) {
       days.push(null);
     }
-    
-    // Add days of the month
+
     for (let day = 1; day <= daysInMonth; day++) {
       days.push(new Date(year, month, day));
     }
-    
+
     return days;
   };
 
@@ -53,7 +68,7 @@ const CalendarView = ({ selectedDate, onDateSelect, availabilityData }) => {
   };
 
   const formatDateForDisplay = (date) => {
-    return date.toLocaleDateString('en-US', {
+    return date.toLocaleDateString(language === 'DE' ? 'de-DE' : 'en-US', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
@@ -62,12 +77,14 @@ const CalendarView = ({ selectedDate, onDateSelect, availabilityData }) => {
   };
 
   const days = getDaysInMonth(currentMonth);
+  const monthLabel = monthNames[language][currentMonth.getMonth()];
+  const weekdayLabels = weekdayNames[language];
 
   return (
     <div className="bg-card rounded-xl p-6 shadow-warm border border-warm">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-xl font-playfair font-semibold text-foreground">
-          Select Your Date
+          {language === 'DE' ? 'Wählen Sie Ihr Datum' : 'Select Your Date'}
         </h3>
         <div className="flex items-center space-x-2">
           <Button
@@ -78,7 +95,7 @@ const CalendarView = ({ selectedDate, onDateSelect, availabilityData }) => {
             className="h-8 w-8 p-0"
           />
           <span className="text-lg font-medium text-foreground min-w-[140px] text-center">
-            {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
+            {monthLabel} {currentMonth.getFullYear()}
           </span>
           <Button
             variant="ghost"
@@ -93,13 +110,13 @@ const CalendarView = ({ selectedDate, onDateSelect, availabilityData }) => {
       {selectedDate && (
         <div className="mb-4 p-3 bg-primary/10 rounded-lg border border-primary/20">
           <p className="text-sm text-primary font-medium">
-            Selected: {formatDateForDisplay(selectedDate)}
+            {language === 'DE' ? 'Ausgewählt:' : 'Selected:'} {formatDateForDisplay(selectedDate)}
           </p>
         </div>
       )}
 
       <div className="grid grid-cols-7 gap-1 mb-2">
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+        {weekdayLabels.map(day => (
           <div key={day} className="p-2 text-center text-sm font-medium text-muted-foreground">
             {day}
           </div>
@@ -122,24 +139,22 @@ const CalendarView = ({ selectedDate, onDateSelect, availabilityData }) => {
               key={index}
               onClick={() => isSelectable && onDateSelect(date)}
               disabled={!isSelectable}
-              className={`
-                relative p-2 h-12 text-sm font-medium rounded-lg transition-warm
-                ${isSelected 
-                  ? 'bg-primary text-primary-foreground shadow-warm' 
-                  : isSelectable
-                    ? availability.available
-                      ? 'bg-background hover:bg-primary/10 text-foreground border border-warm hover:border-primary/30'
-                      : 'bg-muted text-muted-foreground cursor-not-allowed' :'bg-muted text-muted-foreground cursor-not-allowed opacity-50'
-                }
-                ${isToday && !isSelected ? 'ring-2 ring-accent' : ''}
-              `}
+              className={`relative p-2 h-12 text-sm font-medium rounded-lg transition-warm
+                ${isSelected
+                ? 'bg-primary text-primary-foreground shadow-warm'
+                : isSelectable
+                  ? availability.available
+                    ? 'bg-background hover:bg-primary/10 text-foreground border border-warm hover:border-primary/30'
+                    : 'bg-muted text-muted-foreground cursor-not-allowed'
+                  : 'bg-muted text-muted-foreground cursor-not-allowed opacity-50'}
+                ${isToday && !isSelected ? 'ring-2 ring-accent' : ''}`}
             >
               <span className="relative z-10">{date.getDate()}</span>
-              
+
               {availability.special && isSelectable && (
                 <div className="absolute top-1 right-1 w-2 h-2 bg-accent rounded-full"></div>
               )}
-              
+
               {availability.available && availability.slots <= 3 && isSelectable && (
                 <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-warning rounded-full"></div>
               )}
@@ -152,16 +167,20 @@ const CalendarView = ({ selectedDate, onDateSelect, availabilityData }) => {
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-1">
             <div className="w-2 h-2 bg-accent rounded-full"></div>
-            <span>Special Event</span>
+            <span>{language === 'DE' ? 'Besonderer Tag' : 'Special Event'}</span>
           </div>
           <div className="flex items-center space-x-1">
             <div className="w-2 h-2 bg-warning rounded-full"></div>
-            <span>Limited Availability</span>
+            <span>{language === 'DE' ? 'Begrenzte Verfügbarkeit' : 'Limited Availability'}</span>
           </div>
         </div>
         <div className="flex items-center space-x-1">
           <Icon name="Info" size={12} />
-          <span>Reservations up to 60 days in advance</span>
+          <span>
+            {language === 'DE'
+              ? 'Reservierungen bis zu 60 Tage im Voraus'
+              : 'Reservations up to 60 days in advance'}
+          </span>
         </div>
       </div>
     </div>

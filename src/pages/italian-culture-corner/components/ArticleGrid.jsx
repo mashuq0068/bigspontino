@@ -66,15 +66,19 @@ const ArticleCard = ({ article }) => {
   );
 };
 
-const ArticleGrid = ({ articles, onLoadMore, hasMore, loading }) => {
+import React from 'react';
+import Button from '../../../components/ui/Button';
+import ArticleCard from './ArticleCard';
+
+const ArticleGrid = ({ articles, onLoadMore, hasMore, loading, t }) => {
   return (
-    <div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <div className="py-12 px-4 max-w-7xl mx-auto">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
         {articles.map((article) => (
           <ArticleCard key={article.id} article={article} />
         ))}
       </div>
-      
+
       {hasMore && (
         <div className="text-center">
           <Button
@@ -84,9 +88,9 @@ const ArticleGrid = ({ articles, onLoadMore, hasMore, loading }) => {
             loading={loading}
             iconName="Plus"
             iconPosition="left"
-            className="font-montserrat"
+            className="font-montserrat border-primary text-primary hover:bg-primary hover:text-primary-foreground"
           >
-            Load More Stories
+            {t.loadMore}
           </Button>
         </div>
       )}

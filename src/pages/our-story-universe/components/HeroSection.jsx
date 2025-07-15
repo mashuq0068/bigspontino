@@ -1,11 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from '../../../components/AppImage';
 import Button from '../../../components/ui/Button';
 
 const HeroSection = () => {
+  const [language, setLanguage] = useState('EN');
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem('language');
+    if (storedLang) {
+      setLanguage(storedLang);
+    }
+  }, []);
+
+  const content = {
+    EN: {
+      title: 'Our Story',
+      subtitle: 'Where Tradition Meets Passion',
+      paragraph1:
+        'From the sun-kissed hills of Tuscany to your table, our journey is one of passion, tradition, and an unwavering commitment to authentic Italian culinary artistry.',
+      paragraph2:
+        'Every dish tells a story. Every ingredient carries the soul of Italy. Welcome to the Bigspontino family.',
+      cta1: 'Discover Our Heritage',
+      cta2: 'Watch Our Story',
+    },
+    DE: {
+      title: 'Unsere Geschichte',
+      subtitle: 'Wo Tradition auf Leidenschaft trifft',
+      paragraph1:
+        'Von den sonnenverwöhnten Hügeln der Toskana bis zu Ihrem Tisch – unsere Reise ist geprägt von Leidenschaft, Tradition und einem unerschütterlichen Bekenntnis zur authentischen italienischen Kochkunst.',
+      paragraph2:
+        'Jedes Gericht erzählt eine Geschichte. Jede Zutat trägt die Seele Italiens. Willkommen in der Bigspontino-Familie.',
+      cta1: 'Unsere Herkunft Entdecken',
+      cta2: 'Unsere Geschichte Ansehen',
+    },
+  };
+
+  const t = content[language] || content.EN;
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
-      {/* Background Image with Parallax Effect */}
+      {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
           src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
@@ -19,22 +53,20 @@ const HeroSection = () => {
       <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
         <div className="mb-8">
           <h1 className="font-playfair text-5xl lg:text-7xl font-bold text-primary mb-6 text-shadow-warm">
-            Our Story
+            {t.title}
           </h1>
           <div className="w-24 h-1 bg-accent mx-auto mb-8"></div>
           <p className="font-dancing text-2xl lg:text-3xl text-secondary mb-8">
-            Where Tradition Meets Passion
+            {t.subtitle}
           </p>
         </div>
 
         <div className="max-w-2xl mx-auto mb-12">
           <p className="text-lg lg:text-xl text-foreground leading-relaxed mb-6">
-            From the sun-kissed hills of Tuscany to your table, our journey is one of passion, 
-            tradition, and an unwavering commitment to authentic Italian culinary artistry.
+            {t.paragraph1}
           </p>
           <p className="text-base lg:text-lg text-muted-foreground">
-            Every dish tells a story. Every ingredient carries the soul of Italy. 
-            Welcome to the Bigspontino family.
+            {t.paragraph2}
           </p>
         </div>
 
@@ -46,7 +78,7 @@ const HeroSection = () => {
             iconPosition="left"
             className="bg-conversion-gold hover:bg-conversion-gold/90 font-montserrat shadow-warm-lg"
           >
-            Discover Our Heritage
+            {t.cta1}
           </Button>
           <Button
             variant="outline"
@@ -55,7 +87,7 @@ const HeroSection = () => {
             iconPosition="left"
             className="font-montserrat border-primary text-primary hover:bg-primary hover:text-primary-foreground"
           >
-            Watch Our Story
+            {t.cta2}
           </Button>
         </div>
       </div>

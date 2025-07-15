@@ -23,6 +23,7 @@ const HeroSection = () => {
     const newLanguage = currentLanguage === "EN" ? "DE" : "EN";
     setCurrentLanguage(newLanguage);
     localStorage.setItem("language", newLanguage);
+    window.location.reload();
   };
 
   const getTimeBasedContent = () => {
@@ -93,14 +94,26 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen h-max flex items-center justify-center overflow-hidden ">
-      {/* Video Background */}
-      <div className="absolute inset-0 z-0">
-        <img
-          className="w-full object-cover "
-          src="https://s.lightorangebean.com/media/20240914160809/Spicy-Penne-Pasta_-done.png"
-        ></img>
-        <div className="absolute inset-0 bg-black/50"></div>
-      </div>
+    {/* Video Background */}
+<div className="absolute inset-0 z-0">
+  <video
+    autoPlay
+    muted
+    loop
+    playsInline
+    className="w-full h-full object-cover"
+  >
+    <source
+      src="https://storage.googleapis.com/bucket-giorgia-strapi/COCKTAIL_V2_DEF_7f3abcc8b0/COCKTAIL_V2_DEF_7f3abcc8b0.mp4"
+      type="video/mp4"
+    />
+    Your browser does not support the video tag.
+  </video>
+
+  {/* Dark overlay to ensure text readability */}
+  <div className="absolute inset-0 bg-black/50"></div>
+</div>
+
 
       {/* Language Toggle */}
       <div className="absolute top-24 right-4 lg:right-8 z-20">

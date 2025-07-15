@@ -1,259 +1,239 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/ui/Header';
 import HeroSection from './components/HeroSection';
-import CategoryFilter from './components/CategoryFilter';
-import FeaturedArticle from './components/FeaturedArticle';
-import ArticleGrid from './components/ArticleGrid';
-import InteractiveSection from './components/InteractiveSection';
-import CommunitySection from './components/CommunitySection';
-import NewsletterSection from './components/NewsletterSection';
+import Icon from 'components/AppIcon';
 
 const ItalianCultureCorner = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [articles, setArticles] = useState([]);
-  const [featuredArticle, setFeaturedArticle] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
-
-  // Mock data for categories
-  const categories = [
-    { id: 'all', name: 'All Stories', icon: 'BookOpen', count: 48 },
-    { id: 'seasonal', name: 'Seasonal Traditions', icon: 'Calendar', count: 12 },
-    { id: 'ingredients', name: 'Ingredient Stories', icon: 'Leaf', count: 15 },
-    { id: 'regional', name: 'Regional Discoveries', icon: 'MapPin', count: 10 },
-    { id: 'celebrations', name: 'Cultural Celebrations', icon: 'PartyPopper', count: 8 },
-    { id: 'techniques', name: 'Cooking Techniques', icon: 'ChefHat', count: 3 }
-  ];
-
-  // Mock featured article
-  const mockFeaturedArticle = {
-    id: 'featured-1',
-    title: "The Ancient Art of Pasta Making: A Journey Through Time",
-    excerpt: `Discover the centuries-old traditions behind Italy's most beloved culinary art form. From the rolling hills of Emilia-Romagna to the bustling kitchens of modern Italy, pasta making remains a sacred ritual that connects generations through the simple act of transforming flour and eggs into edible poetry.`,
-    image: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    category: { name: 'Culinary Heritage', icon: 'ChefHat' },
-    author: {
-      name: "Chef Marco Antonelli",
-      role: "Culinary Historian",
-      avatar: "https://randomuser.me/api/portraits/men/52.jpg"
-    },
-    publishDate: "July 12, 2025",
-    readTime: 8
-  };
-
-  // Mock articles data
-  const mockArticles = [
-    {
-      id: 1,
-      title: "The Truffle Hunters of Piedmont",
-      excerpt: "Journey into the misty forests of Piedmont where skilled hunters and their loyal dogs search for the elusive white truffle, a treasure more valuable than gold.",
-      image: "https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: { name: 'Regional Discoveries', icon: 'MapPin' },
-      author: {
-        name: "Isabella Romano",
-        avatar: "https://randomuser.me/api/portraits/women/25.jpg"
-      },
-      publishDate: "July 10, 2025",
-      readTime: 6,
-      isNew: true
-    },
-    {
-      id: 2,
-      title: "Sicilian Citrus: Sunshine in Every Drop",
-      excerpt: "Explore the sun-drenched groves of Sicily where blood oranges, lemons, and bergamot create the foundation of Italian cuisine and culture.",
-      image: "https://images.unsplash.com/photo-1557800636-894a64c1696f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: { name: 'Ingredient Stories', icon: 'Leaf' },
-      author: {
-        name: "Antonio Greco",
-        avatar: "https://randomuser.me/api/portraits/men/38.jpg"
-      },
-      publishDate: "July 8, 2025",
-      readTime: 5,
-      isNew: false
-    },
-    {
-      id: 3,
-      title: "La Befana: Italy\'s Beloved Christmas Witch",
-      excerpt: "Discover the enchanting tradition of La Befana, the kind witch who brings gifts to Italian children and represents the magic of Epiphany celebrations.",
-      image: "https://images.unsplash.com/photo-1576919228236-a097c32a5cd4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: { name: 'Cultural Celebrations', icon: 'PartyPopper' },
-      author: {
-        name: "Lucia Ferretti",
-        avatar: "https://randomuser.me/api/portraits/women/42.jpg"
-      },
-      publishDate: "July 5, 2025",
-      readTime: 4,
-      isNew: false
-    },
-    {
-      id: 4,
-      title: "The Art of Gelato: More Than Just Ice Cream",
-      excerpt: "Uncover the secrets behind authentic Italian gelato, from traditional techniques to innovative flavors that capture the essence of Italian creativity.",
-      image: "https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: { name: 'Culinary Heritage', icon: 'ChefHat' },
-      author: {
-        name: "Francesco Moretti",
-        avatar: "https://randomuser.me/api/portraits/men/29.jpg"
-      },
-      publishDate: "July 3, 2025",
-      readTime: 7,
-      isNew: false
-    },
-    {
-      id: 5,
-      title: "Harvest Moon: Autumn Traditions in Tuscany",
-      excerpt: "Experience the magic of autumn in Tuscany, where grape harvests, olive picking, and chestnut festivals celebrate the bounty of the season.",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: { name: 'Seasonal Traditions', icon: 'Calendar' },
-      author: {
-        name: "Chiara Benedetti",
-        avatar: "https://randomuser.me/api/portraits/women/35.jpg"
-      },
-      publishDate: "July 1, 2025",
-      readTime: 6,
-      isNew: false
-    },
-    {
-      id: 6,
-      title: "The Language of Italian Hand Gestures",
-      excerpt: "Decode the expressive world of Italian hand gestures, a rich non-verbal language that adds passion and meaning to every conversation.",
-      image: "https://images.unsplash.com/photo-1555992336-03a23c7b20ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      category: { name: 'Cultural Heritage', icon: 'Heart' },
-      author: {
-        name: "Roberto Santini",
-        avatar: "https://randomuser.me/api/portraits/men/44.jpg"
-      },
-      publishDate: "June 28, 2025",
-      readTime: 5,
-      isNew: false
-    }
-  ];
+  const [language, setLanguage] = useState('EN');
 
   useEffect(() => {
-    // Initialize with mock data
-    setFeaturedArticle(mockFeaturedArticle);
-    setArticles(mockArticles);
+    const storedLang = localStorage.getItem('language');
+    if (storedLang) {
+      setLanguage(storedLang);
+    }
   }, []);
 
-  const handleCategoryChange = (categoryId) => {
-    setActiveCategory(categoryId);
-    setLoading(true);
-    
-    // Simulate API call with filtering
-    setTimeout(() => {
-      if (categoryId === 'all') {
-        setArticles(mockArticles);
-      } else {
-        const filtered = mockArticles.filter(article => 
-          article.category.name.toLowerCase().includes(categoryId) ||
-          (categoryId === 'seasonal' && article.category.name === 'Seasonal Traditions') ||
-          (categoryId === 'ingredients' && article.category.name === 'Ingredient Stories') ||
-          (categoryId === 'regional' && article.category.name === 'Regional Discoveries') ||
-          (categoryId === 'celebrations' && article.category.name === 'Cultural Celebrations') ||
-          (categoryId === 'techniques' && article.category.name === 'Culinary Heritage')
-        );
-        setArticles(filtered);
-      }
-      setLoading(false);
-    }, 800);
-  };
-
-  const handleLoadMore = () => {
-    setLoading(true);
-    
-    // Simulate loading more articles
-    setTimeout(() => {
-      const moreArticles = [
+  const content = {
+    EN: {
+      exploreTitle: "Explore Italy's Culture",
+      exploreItems: [
         {
-          id: 7,
-          title: "Venice Carnival: Masks and Mystery",
-          excerpt: "Step into the enchanting world of Venice Carnival, where elaborate masks and costumes transform the city into a living fairy tale.",
-          image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-          category: { name: 'Cultural Celebrations', icon: 'PartyPopper' },
-          author: {
-            name: "Valentina Rossi",
-            avatar: "https://randomuser.me/api/portraits/women/31.jpg"
-          },
-          publishDate: "June 25, 2025",
-          readTime: 8,
-          isNew: false
+          title: "Regional Flavors",
+          desc: "Taste the diversity from Tuscany to Sicily.",
+          icon: "Utensils"
         },
         {
-          id: 8,
-          title: "The Olive Oil Masters of Liguria",
-          excerpt: "Meet the artisans who produce some of the world\'s finest olive oil in the terraced groves overlooking the Mediterranean Sea.",
-          image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-          category: { name: 'Ingredient Stories', icon: 'Leaf' },
-          author: {
-            name: "Giovanni Alberti",
-            avatar: "https://randomuser.me/api/portraits/men/47.jpg"
-          },
-          publishDate: "June 22, 2025",
-          readTime: 6,
-          isNew: false
+          title: "Timeless Traditions",
+          desc: "Experience the heart of Italian heritage.",
+          icon: "ScrollText"
+        },
+        {
+          title: "Festivals & Joy",
+          desc: "From Venice Carnival to village feasts.",
+          icon: "PartyPopper"
         }
-      ];
-      
-      setArticles(prev => [...prev, ...moreArticles]);
-      setHasMore(false);
-      setLoading(false);
-    }, 1000);
+      ]
+    },
+    DE: {
+      exploreTitle: "Entdecken Sie Italiens Kultur",
+      exploreItems: [
+        {
+          title: "Regionale Geschmäcker",
+          desc: "Genießen Sie die Vielfalt von der Toskana bis Sizilien.",
+          icon: "Utensils"
+        },
+        {
+          title: "Zeitlose Traditionen",
+          desc: "Erleben Sie das Herz des italienischen Erbes.",
+          icon: "ScrollText"
+        },
+        {
+          title: "Feste & Freude",
+          desc: "Vom Karneval in Venedig bis zu Dorffesten.",
+          icon: "PartyPopper"
+        }
+      ]
+    },
+    IT: {
+      exploreTitle: "Esplora la Cultura Italiana",
+      exploreItems: [
+        {
+          title: "Sapori Regionali",
+          desc: "Assapora la diversità dalla Toscana alla Sicilia.",
+          icon: "Utensils"
+        },
+        {
+          title: "Tradizioni Senza Tempo",
+          desc: "Vivi il cuore del patrimonio italiano.",
+          icon: "ScrollText"
+        },
+        {
+          title: "Feste e Gioia",
+          desc: "Dal Carnevale di Venezia alle sagre di paese.",
+          icon: "PartyPopper"
+        }
+      ]
+    }
+  };
+
+  const t = content[language] || content.EN;
+
+  const mockFeaturedArticle = {
+    title: {
+      EN: "The Heartbeat of Italian Culture",
+      DE: "Der Herzschlag der italienischen Kultur",
+      IT: "Il Battito della Cultura Italiana"
+    },
+    excerpt: {
+      EN: "A journey through Italy’s soul — from food to festivals.",
+      DE: "Eine Reise durch Italiens Seele – von Essen bis zu Festen.",
+      IT: "Un viaggio attraverso l'anima dell'Italia – dal cibo alle feste."
+    },
+    image: "https://images.unsplash.com/photo-1608305828173-b519f837a588?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    category: {
+      name: {
+        EN: "Culture",
+        DE: "Kultur",
+        IT: "Cultura"
+      },
+      icon: "Globe"
+    },
+    author: {
+      name: "Giovanni Rizzo",
+      avatar: "https://randomuser.me/api/portraits/men/30.jpg",
+      role: {
+        EN: "Cultural Guide",
+        DE: "Kulturführer",
+        IT: "Guida Culturale"
+      }
+    },
+    publishDate: "July 15, 2025",
+    readTime: 5
+  };
+  const highlights = [
+  {
+    image: "https://www.reise-idee.de/wp-content/uploads/bergkaeserei_allgaeuer-bergbauernmuseum-1-1200x800.jpg",
+    title: {
+      EN: "Artisan Cheese Making",
+      DE: "Käseherstellung von Hand",
+      IT: "Produzione Artigianale di Formaggio"
+    },
+    text: {
+      EN: "Discover centuries-old traditions of Italian cheese making, passed down through generations.",
+      DE: "Entdecken Sie jahrhundertealte Traditionen der italienischen Käseherstellung.",
+      IT: "Scopri le tradizioni secolari della produzione di formaggio in Italia."
+    }
+  },
+  {
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSXdhR8MdwJywTrAWcbhXzb6s9Aei5s-t0iA&",
+    title: {
+      EN: "Mediterranean Living",
+      DE: "Mediterraner Lebensstil",
+      IT: "Vivere Mediterraneo"
+    },
+    text: {
+      EN: "The slow-paced, outdoor lifestyle defines much of southern Italy’s charm.",
+      DE: "Der entspannte Lebensstil im Freien prägt den Charme Süditaliens.",
+      IT: "Lo stile di vita lento e all'aperto definisce il fascino del sud Italia."
+    }
+  },
+  {
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTguNk55LFmndejQBr7pfhoZve-WM3GAaQkAQ&s",
+    title: {
+      EN: "Renaissance Heritage",
+      DE: "Renaissance-Erbe",
+      IT: "Eredità del Rinascimento"
+    },
+    text: {
+      EN: "Italy’s architecture and art preserve the soul of the Renaissance.",
+      DE: "Italiens Architektur und Kunst bewahren die Seele der Renaissance.",
+      IT: "L'architettura e l'arte italiane conservano l'anima del Rinascimento."
+    }
+  }
+];
+
+
+  const localizedFeatured = {
+    ...mockFeaturedArticle,
+    title: mockFeaturedArticle.title[language],
+    excerpt: mockFeaturedArticle.excerpt[language],
+    category: {
+      ...mockFeaturedArticle.category,
+      name: mockFeaturedArticle.category.name[language]
+    },
+    author: {
+      ...mockFeaturedArticle.author,
+      role: mockFeaturedArticle.author.role[language]
+    }
   };
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="pt-16 lg:pt-20">
-        <HeroSection />
-        
-        <div className="max-w-7xl mx-auto px-4 py-16">
-          <CategoryFilter
-            categories={categories}
-            activeCategory={activeCategory}
-            onCategoryChange={handleCategoryChange}
-          />
-          
-          {featuredArticle && (
-            <FeaturedArticle article={featuredArticle} />
-          )}
-          
-          <ArticleGrid
-            articles={articles}
-            onLoadMore={handleLoadMore}
-            hasMore={hasMore}
-            loading={loading}
-          />
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 py-16">
-          <InteractiveSection />
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 py-16">
-          <CommunitySection />
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 py-16">
-          <NewsletterSection />
-        </div>
-      </main>
-      
-      <footer className="bg-charcoal text-charcoal-foreground py-12">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="flex items-center justify-center mb-6">
-            <div className="w-12 h-0.5 bg-golden mr-4"></div>
-            <div className="text-golden font-dancing text-2xl">Bigspontino</div>
-            <div className="w-12 h-0.5 bg-golden ml-4"></div>
+        <HeroSection featuredArticle={localizedFeatured} />
+
+        {/* Explore Section */}
+        <section className="py-12 px-4 max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center text-foreground">
+            {t.exploreTitle}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {t.exploreItems.map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-card border border-muted rounded-xl shadow-sm p-6 hover:shadow-md transition"
+              >
+                <div className="flex items-center mb-4 text-primary">
+                  <Icon name={item.icon} size={24} />
+                  <h3 className="ml-3 text-lg font-semibold">{item.title}</h3>
+                </div>
+                <p className="text-muted-foreground text-sm">{item.desc}</p>
+              </div>
+            ))}
           </div>
-          <p className="text-charcoal-foreground/80 mb-4">
-            Preserving and sharing the authentic spirit of Italian culture, one story at a time.
-          </p>
-          <p className="text-charcoal-foreground/60 text-sm">
-            © {new Date().getFullYear()} Bigspontino. All rights reserved.
-          </p>
+        </section>
+        {/* Cultural Highlights Section */}
+<section className="py-16 px-4 max-w-6xl mx-auto">
+  <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center text-foreground">
+    {language === "EN"
+      ? "Cultural Highlights"
+      : language === "DE"
+      ? "Kulturelle Höhepunkte"
+      : "Punti Salienti Culturali"}
+  </h2>
+
+  <div className="space-y-16">
+    {highlights.map((item, index) => (
+      <div
+        key={index}
+        className={`flex flex-col md:flex-row ${
+          index % 2 === 1 ? "md:flex-row-reverse" : ""
+        } items-center gap-8`}
+      >
+        {/* Image */}
+        <div className="md:w-1/2 w-full">
+          <img
+            src={item.image}
+            alt={item.title[language]}
+            className="rounded-2xl shadow-lg w-full object-cover"
+          />
         </div>
-      </footer>
+
+        {/* Text */}
+        <div className="md:w-1/2 w-full">
+          <h3 className="text-xl font-semibold text-primary mb-4">
+            {item.title[language]}
+          </h3>
+          <p className="text-muted-foreground">{item.text[language]}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+      </main>
     </div>
   );
 };

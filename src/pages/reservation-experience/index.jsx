@@ -37,26 +37,11 @@ const ReservationExperience = () => {
     '2025-07-22': { available: true, slots: 4, special: false }
   };
 
-  const steps = [
-    { id: 1, name: 'Date & Time', icon: 'Calendar', description: 'Choose your preferred date and time' },
-    { id: 2, name: 'Table Selection', icon: 'MapPin', description: 'Select your perfect dining spot' },
-    { id: 3, name: 'Occasion', icon: 'Heart', description: 'Plan your special experience' },
-    { id: 4, name: 'Preferences', icon: 'Settings', description: 'Personalize your dining' },
-    { id: 5, name: 'Summary', icon: 'Check', description: 'Review and confirm' }
-  ];
-
-  const canProceedToStep = (step) => {
-    switch (step) {
-      case 2: return selectedDate && selectedTime;
-      case 3: return selectedTable;
-      case 4: return selectedOccasion;
-      case 5: return preferences.guestCount;
-      default: return true;
-    }
-  };
+ 
+  
 
   const handleNextStep = () => {
-    if (currentStep < 5 && canProceedToStep(currentStep + 1)) {
+    if (currentStep < 5 ) {
       setCurrentStep(currentStep + 1);
     }
   };
@@ -67,7 +52,8 @@ const ReservationExperience = () => {
     }
   };
 
-  const handleConfirmReservation = async () => {
+  const handleConfirmReservation = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
     
     // Simulate API call
@@ -211,77 +197,13 @@ const ReservationExperience = () => {
       </Helmet>
       
       <div className="min-h-screen bg-background">
-        <Header />
-        
-        {/* Hero Section */}
-        <div className="pt-20 pb-8 bg-gradient-hero">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h1 className="text-4xl md:text-5xl font-playfair font-bold text-foreground mb-4">
-                Reserve Your Italian Journey
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Transform your dining into a personalized Italian experience that reflects the warmth of our hospitality and the richness of our culinary heritage.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Progress Steps */}
-        <div className="bg-card border-b border-warm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="flex items-center justify-between">
-              {steps.map((step, index) => (
-                <div key={step.id} className="flex items-center">
-                  <div className="flex items-center">
-                    <button
-                      onClick={() => canProceedToStep(step.id) && setCurrentStep(step.id)}
-                      disabled={!canProceedToStep(step.id)}
-                      className={`
-                        w-10 h-10 rounded-full flex items-center justify-center transition-warm
-                        ${currentStep === step.id
-                          ? 'bg-primary text-primary-foreground shadow-warm'
-                          : currentStep > step.id
-                            ? 'bg-success text-success-foreground'
-                            : canProceedToStep(step.id)
-                              ? 'bg-muted text-muted-foreground hover:bg-primary/10 cursor-pointer'
-                              : 'bg-muted text-muted-foreground cursor-not-allowed opacity-50'
-                        }
-                      `}
-                    >
-                      {currentStep > step.id ? (
-                        <Icon name="Check" size={20} />
-                      ) : (
-                        <Icon name={step.icon} size={20} />
-                      )}
-                    </button>
-                    <div className="ml-3 hidden sm:block">
-                      <div className={`text-sm font-medium ${
-                        currentStep === step.id ? 'text-primary' : 'text-foreground'
-                      }`}>
-                        {step.name}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        {step.description}
-                      </div>
-                    </div>
-                  </div>
-                  {index < steps.length - 1 && (
-                    <div className={`
-                      w-8 h-0.5 mx-4 transition-warm
-                      ${currentStep > step.id ? 'bg-success' : 'bg-muted'}
-                    `} />
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+      
+       
 
         {/* Main Content */}
         <div className="py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="">
               {/* Main Form */}
               <div className="lg:col-span-2">
                 {currentStep === 1 && (
@@ -310,23 +232,9 @@ const ReservationExperience = () => {
                   />
                 )}
 
+          
+
                 {currentStep === 3 && (
-                  <OccasionPlanner
-                    selectedOccasion={selectedOccasion}
-                    onOccasionSelect={setSelectedOccasion}
-                    occasionDetails={occasionDetails}
-                    onDetailsChange={setOccasionDetails}
-                  />
-                )}
-
-                {currentStep === 4 && (
-                  <GuestPreferences
-                    preferences={preferences}
-                    onPreferencesChange={setPreferences}
-                  />
-                )}
-
-                {currentStep === 5 && (
                   <ReservationSummary
                     reservationData={reservationData}
                     onConfirm={handleConfirmReservation}
@@ -336,82 +244,6 @@ const ReservationExperience = () => {
                 )}
               </div>
 
-              {/* Sidebar */}
-              <div className="space-y-6">
-                {/* Quick Summary */}
-                <div className="bg-card rounded-xl p-6 shadow-warm border border-warm sticky top-24">
-                  <h3 className="font-playfair font-semibold text-foreground mb-4">
-                    Your Reservation
-                  </h3>
-                  <div className="space-y-3 text-sm">
-                    <div className="flex items-center space-x-3">
-                      <Icon name="Calendar" size={16} className="text-muted-foreground" />
-                      <span className="text-muted-foreground">Date:</span>
-                      <span className="text-foreground font-medium">
-                        {selectedDate ? selectedDate.toLocaleDateString('en-US', { 
-                          month: 'short', 
-                          day: 'numeric' 
-                        }) : 'Not selected'}
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <Icon name="Clock" size={16} className="text-muted-foreground" />
-                      <span className="text-muted-foreground">Time:</span>
-                      <span className="text-foreground font-medium">
-                        {selectedTime || 'Not selected'}
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <Icon name="MapPin" size={16} className="text-muted-foreground" />
-                      <span className="text-muted-foreground">Table:</span>
-                      <span className="text-foreground font-medium">
-                        {selectedTable?.name || 'Not selected'}
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <Icon name="Users" size={16} className="text-muted-foreground" />
-                      <span className="text-muted-foreground">Guests:</span>
-                      <span className="text-foreground font-medium">
-                        {preferences.guestCount || '2'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Contact Information */}
-                <div className="bg-card rounded-xl p-6 shadow-warm border border-warm">
-                  <h3 className="font-playfair font-semibold text-foreground mb-4">
-                    Need Assistance?
-                  </h3>
-                  <div className="space-y-3 text-sm">
-                    <div className="flex items-center space-x-3">
-                      <Icon name="Phone" size={16} className="text-primary" />
-                      <div>
-                        <div className="text-foreground font-medium">+49 30 1234 5678</div>
-                        <div className="text-muted-foreground">Mon-Sun 10:00-22:00</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <Icon name="Mail" size={16} className="text-primary" />
-                      <div>
-                        <div className="text-foreground font-medium">reservations@bigspontino.de</div>
-                        <div className="text-muted-foreground">24/7 support</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Cultural Tip */}
-                <div className="bg-accent/10 rounded-xl p-6 border border-accent/20">
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Icon name="Lightbulb" size={16} className="text-accent" />
-                    <h3 className="font-medium text-accent">Cultural Tip</h3>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    In Italy, dining is a celebration of life and relationships. Take your time, savor each course, and enjoy the conversation. "La dolce vita" begins at the table.
-                  </p>
-                </div>
-              </div>
             </div>
 
             {/* Navigation Buttons */}
@@ -427,7 +259,7 @@ const ReservationExperience = () => {
               </Button>
               
               <div className="text-sm text-muted-foreground">
-                Step {currentStep} of {steps.length}
+                Step {currentStep} of {3}
               </div>
               
               <Button
@@ -435,10 +267,9 @@ const ReservationExperience = () => {
                 iconName="ChevronRight"
                 iconPosition="right"
                 onClick={handleNextStep}
-                disabled={currentStep === 5 || !canProceedToStep(currentStep + 1)}
-                className="bg-primary hover:bg-primary/90"
+                className={`bg-primary hover:bg-primary/90 ${currentStep === 3 ? 'hidden' : ''}`}
               >
-                {currentStep === 5 ? 'Complete' : 'Next Step'}
+                {currentStep === 3 ? 'Complete' : 'Next Step'}
               </Button>
             </div>
           </div>
