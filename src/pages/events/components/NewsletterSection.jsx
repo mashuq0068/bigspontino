@@ -69,7 +69,7 @@ const NewsletterSection = () => {
             loading={loading}
             iconName="Send"
             iconPosition="right"
-            className="bg-primary hover:bg-primary/90 font-montserrat whitespace-nowrap"
+            className="bg-primary hover:bg-primary/90  whitespace-nowrap"
           >
             Subscribe
           </Button>

@@ -75,17 +75,17 @@ const HeroSection = () => {
 
   const content = {
     EN: {
-      mainHeadline: "Where Italian Soul Meets Culinary Artistry",
+      mainHeadline: "Bigspontino",
       description:
-        "Experience authentic Italian cuisine crafted with passion, tradition, and the finest ingredients from across Italy.",
+        "The small, fine day bar in the middle of lively Winterhude for the ‘big times",
       reserveButton: "Reserve Your Table",
       exploreButton: "Explore Our Story",
       languageLabel: "Language",
     },
     DE: {
-      mainHeadline: "Wo Italienische Seele auf Kulinarische Kunst trifft",
+      mainHeadline: "Bigspontino",
       description:
-        "Erleben Sie authentische italienische Küche, die mit Leidenschaft, Tradition und den besten Zutaten aus ganz Italien zubereitet wird.",
+        "Die kleine, feine Day-Bar mitten im lebendigen Winterhude für die ‘großen Zeiten’.",
       reserveButton: "Tisch Reservieren",
       exploreButton: "Unsere Geschichte Entdecken",
       languageLabel: "Sprache",
@@ -93,7 +93,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen h-max flex items-center justify-center overflow-hidden ">
+    <section className="relative min-h-[90vh] h-max flex items-center justify-center overflow-hidden ">
     {/* Video Background */}
 <div className="absolute inset-0 z-0">
   <video
@@ -109,6 +109,7 @@ const HeroSection = () => {
     />
     Your browser does not support the video tag.
   </video>
+  
 
   {/* Dark overlay to ensure text readability */}
   <div className="absolute inset-0 bg-black/50"></div>
@@ -116,7 +117,7 @@ const HeroSection = () => {
 
 
       {/* Language Toggle */}
-      <div className="absolute top-24 right-4 lg:right-8 z-20">
+      <div className="absolute top-4 right-4 lg:right-4 z-20">
         <div className="flex items-center space-x-2 bg-background/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-warm">
           <Icon name="Globe" size={16} className="text-white" />
           <span className="text-sm font-medium text-white">
@@ -133,7 +134,7 @@ const HeroSection = () => {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 text-center px-4 lg:px-8 max-w-6xl mx-auto">
+      <div className="relative z-10 md:mt-0 mt-12 text-center px-4 lg:px-8 max-w-6xl mx-auto">
     
 
         {/* Main Headline */}
@@ -154,7 +155,7 @@ const HeroSection = () => {
               size="lg"
               iconName="Calendar"
               iconPosition="left"
-              className="bg-conversion-gold hover:bg-conversion-gold/90 text-conversion-gold-foreground font-montserrat shadow-warm-lg px-8 py-4 text-lg"
+              className="bg-conversion-gold hover:bg-conversion-gold/90 text-conversion-gold-foreground  shadow-warm-lg px-8 py-4 text-lg"
             >
               {content[currentLanguage].reserveButton}
             </Button>
@@ -166,11 +167,12 @@ const HeroSection = () => {
               size="lg"
               iconName="Heart"
               iconPosition="left"
-              className="border-background/30 text-background text-black hover:bg-background/10 font-montserrat px-8 py-4 text-lg backdrop-blur-sm"
+              className="border-background/30 text-background text-black hover:bg-background/10  px-8 py-4 text-lg backdrop-blur-sm"
             >
               {content[currentLanguage].exploreButton}
             </Button>
           </Link>
+          
         </div>
       </div>
 
@@ -181,6 +183,13 @@ const HeroSection = () => {
 
       <div className="absolute bottom-1/4 right-8 opacity-20 hidden lg:block">
         <div className="w-24 h-24 border-2 border-golden rounded-full animate-pulse delay-1000"></div>
+      </div>
+      {/* explore scroll */}
+       <div className="absolute bottom-8 left-[40vw] md:left-[45vw] lg:left-1/2 transform -translate-x-1/2 text-center animate-gentle-bounce">
+        <p className="text-[#fdf5e6] text-lg font-medium tracking-wide">
+          {currentLanguage === 'DE' ? 'Entdecken' : 'Explore'}
+        </p>
+        <Icon name="ChevronDown" size={32} className="text-white/60 mx-auto mt-1" />
       </div>
     </section>
   );

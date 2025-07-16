@@ -12,26 +12,32 @@ const HeroSection = () => {
     }
   }, []);
 
-  const content = {
-    EN: {
-      title: 'Italian Culture Corner',
-      subtitle: 'Dove la tradizione incontra la passione',
-      paragraph:
-        'Immerse yourself in the rich tapestry of Italian culture, from ancient traditions to modern celebrations. Discover the stories behind every dish, the heritage of every ingredient, and the passion that defines la dolce vita.',
-      updated: 'Updated Weekly',
-      community: 'Community Stories',
-      insights: 'Authentic Insights',
-    },
-    DE: {
-      title: 'Italienische Kultur-Ecke',
-      subtitle: 'Wo Tradition auf Leidenschaft trifft',
-      paragraph:
-        'Tauchen Sie ein in das reiche Gefüge der italienischen Kultur – von alten Traditionen bis zu modernen Feiern. Entdecken Sie die Geschichten hinter jedem Gericht, das Erbe jedes Zutats und die Leidenschaft, die „la dolce vita“ definiert.',
-      updated: 'Wöchentlich aktualisiert',
-      community: 'Gemeinschaftsgeschichten',
-      insights: 'Authentische Einblicke',
-    },
-  };
+const content = {
+  EN: {
+    title: 'La vita é bella',
+    subtitle: '...and there is always a reason to celebrate.',
+    paragraph: `The Big Spuntino lives Italian hospitality and coming together – and not only in the day bar itself, but also in its own private or business premises. Get in touch with our team to discuss your tailor-made events for the most special moments of pleasure.
+
+The Big Spuntino is already working diligently on spettacolo event series – at aperitif hour, dinner time, and of course, fantastico brunch.
+Soon to come – stay tuned.`,
+    updated: 'Updated Weekly',
+    community: 'Community Stories',
+    insights: 'Authentic Insights',
+  },
+  DE: {
+    title: 'La vita é bella',
+    subtitle: '…und es gibt immer einen Grund um zu feiern.',
+    paragraph: `Das Big Spuntino lebt die italienische Gastfreundschaft und das Zusammenkommen – und das nicht nur in der Tagesbar selbst, sondern auch in eigenen privaten oder geschäftlichen Räumlichkeiten. Nehmen Sie Kontakt mit unserem Team auf, um Ihre maßgeschneiderten Veranstaltungen für die besondersten Genussmomente zu besprechen.
+
+Das Big Spuntino arbeitet bereits fleißig an der spettacolo Veranstaltungsserie – zur Aperitifzeit, zum Dinner und natürlich zum fantastico Brunch.
+Bald verfügbar – bleiben Sie dran.`,
+    updated: 'Wöchentlich aktualisiert',
+    community: 'Gemeinschaftsgeschichten',
+    insights: 'Authentische Einblicke',
+  },
+};
+
+
 
   const t = content[language] || content.EN;
 
@@ -65,22 +71,6 @@ const HeroSection = () => {
           {t.paragraph}
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <div className="flex items-center text-white/80">
-            <Icon name="Calendar" size={20} className="mr-2" />
-            <span className="text-sm">{t.updated}</span>
-          </div>
-          <div className="hidden sm:block w-1 h-1 bg-white/40 rounded-full"></div>
-          <div className="flex items-center text-white/80">
-            <Icon name="Users" size={20} className="mr-2" />
-            <span className="text-sm">{t.community}</span>
-          </div>
-          <div className="hidden sm:block w-1 h-1 bg-white/40 rounded-full"></div>
-          <div className="flex items-center text-white/80">
-            <Icon name="Globe" size={20} className="mr-2" />
-            <span className="text-sm">{t.insights}</span>
-          </div>
-        </div>
       </div>
 
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-gentle-bounce">

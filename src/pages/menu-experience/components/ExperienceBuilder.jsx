@@ -197,7 +197,7 @@ const ExperienceBuilder = ({ selectedDishes, onRemoveDish, onClearAll }) => {
                   fullWidth
                   iconName="Calendar"
                   iconPosition="left"
-                  className="bg-conversion-gold hover:bg-conversion-gold/90 font-montserrat"
+                  className="bg-conversion-gold hover:bg-conversion-gold/90 "
                 >
                   {t.reserveWithMenu}
                 </Button>

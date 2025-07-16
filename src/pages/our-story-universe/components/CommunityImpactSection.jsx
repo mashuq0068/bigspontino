@@ -205,7 +205,7 @@ const CommunityImpactSection = () => {
                 size="lg"
                 iconName="Calendar"
                 iconPosition="left"
-                className="bg-conversion-gold hover:bg-conversion-gold/90 font-montserrat shadow-warm-lg"
+                className="bg-conversion-gold hover:bg-conversion-gold/90  shadow-warm-lg"
               >
                 View Upcoming Events
               </Button>
@@ -214,7 +214,7 @@ const CommunityImpactSection = () => {
                 size="lg"
                 iconName="Users"
                 iconPosition="left"
-                className="font-montserrat border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                className=" border-primary text-primary hover:bg-primary hover:text-primary-foreground"
               >
                 Get Involved
               </Button>

@@ -88,7 +88,7 @@ const ArticleGrid = ({ articles, onLoadMore, hasMore, loading, t }) => {
             loading={loading}
             iconName="Plus"
             iconPosition="left"
-            className="font-montserrat border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            className=" border-primary text-primary hover:bg-primary hover:text-primary-foreground"
           >
             {t.loadMore}
           </Button>

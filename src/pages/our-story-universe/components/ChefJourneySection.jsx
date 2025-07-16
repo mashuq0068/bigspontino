@@ -120,7 +120,7 @@ const ChefJourneySection = () => {
             <button
               key={chapter.id}
               onClick={() => setActiveChapter(index)}
-              className={`px-6 py-3 rounded-full font-montserrat font-medium transition-warm ${
+              className={`px-6 py-3 rounded-full  font-medium transition-warm ${
                 activeChapter === index
                   ? 'bg-primary text-primary-foreground shadow-warm'
                   : 'bg-card text-card-foreground hover:bg-primary/10 border border-warm'

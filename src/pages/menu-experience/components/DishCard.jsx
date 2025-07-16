@@ -154,7 +154,7 @@ const DishCard = ({ dish, onAddToExperience }) => {
             </p>
           </div>
           <div className="text-right">
-            <div className="font-montserrat text-lg font-semibold text-primary">
+            <div className=" text-lg font-semibold text-primary">
               {formatPrice(dish.price)}
             </div>
             {dish.portionSize && (

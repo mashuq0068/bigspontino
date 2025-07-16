@@ -411,7 +411,7 @@ const ReservationSummary = ({
               loading={isLoading}
               iconName="Check"
               iconPosition="left"
-              className="bg-conversion-gold hover:bg-conversion-gold/90 font-montserrat shadow-warm-lg"
+              className="bg-conversion-gold hover:bg-conversion-gold/90  shadow-warm-lg"
             >
               {isLoading ? t.confirmingButton : t.confirmButton}
             </Button>

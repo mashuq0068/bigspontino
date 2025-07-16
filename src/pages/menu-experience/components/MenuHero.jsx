@@ -1,73 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import Image from '../../../components/AppImage';
-import Button from '../../../components/ui/Button';
+import { Flower2 } from 'lucide-react'; // or use your Icon component if needed
 
 const MenuHero = () => {
   const [language, setLanguage] = useState('EN');
 
   useEffect(() => {
     const storedLang = localStorage.getItem('language');
-    if (storedLang) {
-      setLanguage(storedLang);
-    }
+    if (storedLang) setLanguage(storedLang);
   }, []);
 
   const content = {
     EN: {
-      title: 'Culinary Journey',
-      description:
-        'Where every dish tells a story of Italian heritage,\n crafted with passion and served with soul',
-      cta1: 'Explore Our Menu',
-      cta2: 'Reserve Your Table',
+      title: "A Tavola",
+      paragraphs: [
+        `The menu at Big Spuntino is a warm tribute to Italy’s culinary heritage. From insalata, caprese and octopus to the crispiest foccacia, our menu offers an exquisite selection of classic spuntini (*ital. “snacks”).`,
+        `Of course, this also applies to the dolci: from the traditional crème the mascarpone to the fluffy light maritozzi, the Big Spuntino sweetens everyday life with the churros all italiana – Neapolitan doughnut sticks, served warm and perfect for dipping in melted chocolate with special toppings.`,
+        `In addition to the culinary experience, classic Italian cosmopolitan cocktails and wines from North and South can be tasted. The essence of an Italian summer is brought to life with a sparkling spritz, while the special aromas of our signature cocktail Spuntino 75 are the perfect prelude to an indulgent evening.`,
+      ],
     },
     DE: {
-      title: 'Kulinarische Reise',
-      description:
-        'Wo jedes Gericht eine Geschichte über italienisches Erbe erzählt,\n mit Leidenschaft gestaltet und mit Seele serviert',
-      cta1: 'Unsere Speisekarte Entdecken',
-      cta2: 'Tisch Reservieren',
+      title: "A Tavola",
+      paragraphs: [
+        `Die Speisekarte des Big Spuntino ist ein herzliche Hommage an Italiens kulinarisches Erbe. Von Insalata Caprese und Pulpo bis hin zu den knusprigsten Foccacia bietet unsere Speisekarte eine exquisite Auswahl an klassischen Spuntini (*ital. „Snacks“).`,
+        `Dies natürlich auch bei den Dolci: Von der traditionellen Creme die Mascarpone bis hin zu den fluffig leichten Maritozzi versüßt das Big Spuntino den Alltag mit den Churros all italiana – neapolitanische Doughnut-Stangen, warm serviert und perfekt zum Eintauchen in geschmolzene Schokolade mit special Toppings.`,
+        `Ergänzend zum kulinarischen Erlebnis können klassische italienisch-kosmopolitische Cocktails und Weine aus Nord und Süd verköstigt werden. Die Essenz eines italienischen Sommers wird mit einem spritzigen Spritz zum Leben erweckt, während die besonderen Aromen unseres Signature-Cocktails Spuntino 75 der perfekten Auftakt für einen genussvollen Abend sind.`,
+      ],
     },
   };
 
-  const t = content[language] || content.EN;
+  const { title, paragraphs } = content[language];
 
   return (
-    <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-hero">
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-          alt="Elegant Italian restaurant interior with warm lighting"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
-      </div>
+    <section className="relative bg-[#fff7ef] py-20 px-6 md:px-12 text-center">
+      <div className="max-w-4xl mx-auto">
+        {/* Decorative Icon */}
+        <div className="mb-4 flex justify-center">
+          <Flower2 className="text-[#b8860b] w-10 h-10 animate-fade-in" />
+        </div>
 
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-        <h1 className="font-playfair text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 text-shadow-warm">
-          {t.title}
-        </h1>
-        <p className="text-xl md:text-2xl text-white/90 mb-8 font-light leading-relaxed whitespace-pre-line">
-          {t.description}
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button
-            variant="default"
-            size="lg"
-            iconName="ChefHat"
-            iconPosition="left"
-            className="bg-conversion-gold hover:bg-conversion-gold/90 font-montserrat shadow-warm-lg"
-          >
-            {t.cta1}
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            iconName="Calendar"
-            iconPosition="left"
-            className="border-white  hover:bg-white hover:text-primary font-montserrat"
-          >
-            {t.cta2}
-          </Button>
+        {/* Title */}
+        <h2 className="text-4xl md:text-5xl font-playfair text-primary font-bold mb-8">
+          {title}
+        </h2>
+
+        {/* Paragraphs */}
+        <div className="space-y-6 text-base md:text-lg text-muted-foreground font-light leading-relaxed text-justify md:text-center">
+          {paragraphs.map((p, idx) => (
+            <p key={idx}>{p}</p>
+          ))}
         </div>
       </div>
     </section>

@@ -172,7 +172,7 @@ const TodaysInspiration = () => {
                   fullWidth
                   iconName="Calendar"
                   iconPosition="left"
-                  className="bg-conversion-gold hover:bg-conversion-gold/90 font-montserrat"
+                  className="bg-conversion-gold hover:bg-conversion-gold/90 "
                 >
                   {content.reserveButton}
                 </Button>
@@ -184,7 +184,7 @@ const TodaysInspiration = () => {
                   fullWidth
                   iconName="ArrowRight"
                   iconPosition="right"
-                  className="font-montserrat"
+                  className=""
                 >
                   {content.learnMoreButton}
                 </Button>

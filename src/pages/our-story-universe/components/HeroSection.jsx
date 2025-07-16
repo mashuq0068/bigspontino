@@ -76,7 +76,7 @@ const HeroSection = () => {
             size="lg"
             iconName="Heart"
             iconPosition="left"
-            className="bg-conversion-gold hover:bg-conversion-gold/90 font-montserrat shadow-warm-lg"
+            className="bg-conversion-gold hover:bg-conversion-gold/90  shadow-warm-lg"
           >
             {t.cta1}
           </Button>
@@ -85,7 +85,7 @@ const HeroSection = () => {
             size="lg"
             iconName="Play"
             iconPosition="left"
-            className="font-montserrat border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            className=" border-primary text-primary hover:bg-primary hover:text-primary-foreground"
           >
             {t.cta2}
           </Button>

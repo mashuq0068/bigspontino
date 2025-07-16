@@ -153,7 +153,7 @@ const ChefRecommendations = ({ onAddToExperience }) => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-montserrat text-2xl font-bold text-primary">
+                    <div className=" text-2xl font-bold text-primary">
                       €{dish.price.toFixed(2).replace('.', ',')}
                     </div>
                   </div>
@@ -220,7 +220,7 @@ const ChefRecommendations = ({ onAddToExperience }) => {
                     size="sm"
                     iconName="Plus"
                     iconPosition="left"
-                    className="flex-1 bg-conversion-gold hover:bg-conversion-gold/90 font-montserrat"
+                    className="flex-1 bg-conversion-gold hover:bg-conversion-gold/90 "
                     onClick={() => onAddToExperience(dish)}
                   >
                     Add to Experience
@@ -245,7 +245,7 @@ const ChefRecommendations = ({ onAddToExperience }) => {
               size="lg"
               iconName="Calendar"
               iconPosition="left"
-              className="bg-primary hover:bg-primary/90 font-montserrat shadow-warm"
+              className="bg-primary hover:bg-primary/90  shadow-warm"
             >
               Reserve Chef's Tasting Menu
             </Button>

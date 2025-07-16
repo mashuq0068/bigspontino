@@ -272,7 +272,7 @@ const VisitInformation = () => {
               size="lg"
               iconName="Calendar"
               iconPosition="left"
-              className="bg-conversion-gold bg-conversion-gold/90 font-montserrat"
+              className="bg-conversion-gold bg-conversion-gold/90 "
             >
               Reserve Your Table
             </Button>
@@ -281,7 +281,7 @@ const VisitInformation = () => {
               size="lg"
               iconName="Phone"
               iconPosition="left"
-              className="font-montserrat"
+              className=""
             >
               Call for Special Requests
             </Button>

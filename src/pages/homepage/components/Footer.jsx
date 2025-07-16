@@ -241,7 +241,7 @@ const Footer = () => {
                 fullWidth
                 iconName="Send"
                 iconPosition="right"
-                className="bg-golden hover:bg-golden/90 text-golden-foreground font-montserrat"
+                className="bg-golden hover:bg-golden/90 text-golden-foreground "
               >
                 {content[currentLanguage].subscribe}
               </Button>

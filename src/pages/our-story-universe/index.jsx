@@ -26,7 +26,6 @@ const OurStoryUniverse = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <Header />
         
         <main>
           <HeroSection />

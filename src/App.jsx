@@ -3,7 +3,7 @@ import Routes from "./Routes";
 
 function App() {
   return (
-    <div className="font-montserrat">
+    <div className="">
       <Routes />
     </div>
   );

@@ -190,7 +190,7 @@ const CommunitySection = () => {
             variant="outline"
             iconName="Plus"
             iconPosition="left"
-            className="font-montserrat"
+            className=""
           >
             Share Your Story
           </Button>

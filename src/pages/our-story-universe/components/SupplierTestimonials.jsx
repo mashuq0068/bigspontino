@@ -194,7 +194,7 @@ const SupplierTestimonials = () => {
             size="lg"
             iconName="ExternalLink"
             iconPosition="right"
-            className="bg-conversion-gold hover:bg-conversion-gold/90 font-montserrat shadow-warm-lg"
+            className="bg-conversion-gold hover:bg-conversion-gold/90  shadow-warm-lg"
           >
             Experience These Authentic Flavors
           </Button>

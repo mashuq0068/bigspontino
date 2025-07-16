@@ -246,7 +246,7 @@ const SeasonalEvents = () => {
                       variant="default"
                       iconName="Calendar"
                       iconPosition="left"
-                      className="bg-conversion-gold hover:bg-conversion-gold/90 font-montserrat"
+                      className="bg-conversion-gold hover:bg-conversion-gold/90 "
                     >
                       {currentLanguage === 'EN' ? 'Book Experience' : 'Erlebnis Buchen'}
                     </Button>
@@ -289,7 +289,7 @@ const SeasonalEvents = () => {
                         size="sm"
                         iconName="ArrowRight"
                         iconPosition="right"
-                        className="font-montserrat"
+                        className=""
                       >
                         {currentLanguage === 'EN' ? 'Book' : 'Buchen'}
                       </Button>

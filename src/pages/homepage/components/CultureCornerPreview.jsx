@@ -188,7 +188,7 @@ const CultureCornerPreview = () => {
                 variant="default"
                 iconName="Send"
                 iconPosition="right"
-                className="bg-accent hover:bg-accent/90 font-montserrat whitespace-nowrap"
+                className="bg-accent hover:bg-accent/90  whitespace-nowrap"
               >
                 {currentLanguage === 'EN' ? 'Subscribe' : 'Abonnieren'}
               </Button>
@@ -209,7 +209,7 @@ const CultureCornerPreview = () => {
               size="lg"
               iconName="ArrowRight"
               iconPosition="right"
-              className="font-montserrat"
+              className=""
             >
               {currentLanguage === 'EN' ? 'Explore All Articles' : 'Alle Artikel Erkunden'}
             </Button>
