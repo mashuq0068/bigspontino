@@ -44,7 +44,7 @@ const MenuHero = () => {
         </h2>
 
         {/* Paragraphs */}
-        <div className="space-y-6 text-base md:text-lg text-muted-foreground font-light leading-relaxed text-justify md:text-center">
+        <div className="space-y-6 text-base md:text-lg  font-light leading-relaxed text-justify md:text-center">
           {paragraphs.map((p, idx) => (
             <p key={idx}>{p}</p>
           ))}

@@ -59,7 +59,7 @@ const ContactHero = () => {
       </div>
 
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto text-white">
-        <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-4">
+        <h1 className=" text-4xl md:text-5xl font-bold mb-4">
           {t.title}
         </h1>
 

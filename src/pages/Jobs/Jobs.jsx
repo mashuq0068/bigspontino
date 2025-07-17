@@ -42,7 +42,7 @@ const Jobs = () => {
 
       {/* Main Content */}
       <div className="text-center max-w-3xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-playfair font-bold text-primary mb-4">
+        <h2 className="text-4xl md:text-5xl font-playfair text-primary font-bold  mb-4">
           {t.title}
         </h2>
 
@@ -50,7 +50,7 @@ const Jobs = () => {
           {t.headline}
         </h3>
 
-        <p className="text-muted-foreground text-lg md:text-xl mb-10 leading-relaxed px-4">
+        <p className=" text-lg md:text-xl mb-10 leading-relaxed px-4">
           {t.paragraph}
         </p>
 

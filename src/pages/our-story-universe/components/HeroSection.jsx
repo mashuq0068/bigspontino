@@ -12,28 +12,24 @@ const HeroSection = () => {
     }
   }, []);
 
-  const content = {
-    EN: {
-      title: 'Our Story',
-      subtitle: 'Where Tradition Meets Passion',
-      paragraph1:
-        'From the sun-kissed hills of Tuscany to your table, our journey is one of passion, tradition, and an unwavering commitment to authentic Italian culinary artistry.',
-      paragraph2:
-        'Every dish tells a story. Every ingredient carries the soul of Italy. Welcome to the Bigspontino family.',
-      cta1: 'Discover Our Heritage',
-      cta2: 'Watch Our Story',
-    },
-    DE: {
-      title: 'Unsere Geschichte',
-      subtitle: 'Wo Tradition auf Leidenschaft trifft',
-      paragraph1:
-        'Von den sonnenverwöhnten Hügeln der Toskana bis zu Ihrem Tisch – unsere Reise ist geprägt von Leidenschaft, Tradition und einem unerschütterlichen Bekenntnis zur authentischen italienischen Kochkunst.',
-      paragraph2:
-        'Jedes Gericht erzählt eine Geschichte. Jede Zutat trägt die Seele Italiens. Willkommen in der Bigspontino-Familie.',
-      cta1: 'Unsere Herkunft Entdecken',
-      cta2: 'Unsere Geschichte Ansehen',
-    },
-  };
+ const content = {
+  EN: {
+    title: 'Our Story',
+    subtitle: 'Where Italy Meets Hamburg',
+    paragraph1: 'Since 2015, Dario Pittarello has brought authentic Italian flavors to Hamburg at Ristorante Pittarello. Now in 2025, he expands his vision with Big Spuntino—a vibrant day bar celebrating Italian joy.',
+    paragraph2: 'Every snack, every drink carries the spirit of Italian hospitality. Welcome to our family.',
+    cta1: 'Discover Our Roots', 
+    cta2: 'Watch Our Story'
+  },
+  DE: {
+    title: 'Unsere Geschichte',
+    subtitle: 'Wo Italien auf Hamburg trifft',
+    paragraph1: 'Seit 2015 bringt Dario Pittarello mit dem Ristorante Pittarello authentische italienische Küche nach Hamburg. Nun erweitert er 2025 seine Vision mit dem Big Spuntino – einer lebendigen Tagesbar italienischer Lebensfreude.',
+    paragraph2: 'Jeder Snack, jedes Getränk trägt die Seele italienischer Gastfreundschaft. Willkommen in unserer Familie.',
+    cta1: 'Unsere Wurzeln Entdecken',
+    cta2: 'Geschichte Ansehen'
+  }
+};
 
   const t = content[language] || content.EN;
 
@@ -65,12 +61,10 @@ const HeroSection = () => {
           <p className="text-lg lg:text-xl text-foreground leading-relaxed mb-6">
             {t.paragraph1}
           </p>
-          <p className="text-base lg:text-lg text-muted-foreground">
-            {t.paragraph2}
-          </p>
+        
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
             variant="default"
             size="lg"
@@ -89,7 +83,7 @@ const HeroSection = () => {
           >
             {t.cta2}
           </Button>
-        </div>
+        </div> */}
       </div>
 
       {/* Scroll Indicator */}

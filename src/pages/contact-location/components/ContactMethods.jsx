@@ -77,7 +77,7 @@ const ContactMethods = () => {
             <h2 className="text-2xl font-bold mb-6">
               {texts[language].openingHeading}
             </h2>
-            <ul className="space-y-2 text-muted-foreground">
+            <ul className="space-y-2 text-black">
               {openingHours.map((item, idx) => (
                 <li key={idx} className="flex justify-between  pb-2">
                   <span>{item.day}</span>

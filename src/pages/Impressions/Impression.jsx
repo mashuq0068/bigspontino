@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const images = [
   {
@@ -28,11 +28,19 @@ const images = [
 ];
 
 const Impressions = () => {
+    const [language, setLanguage] = useState("EN");
+  
+    useEffect(() => {
+      const storedLang = localStorage.getItem("language");
+      if (storedLang) {
+        setLanguage(storedLang);
+      }
+    }, []);
   return (
     <section className="bg-[#fff7ef] min-h-screen py-16 px-6 md:px-12">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-playfair font-bold text-primary mb-12 text-center">
-          Impressions Gallery
+        <h1 className="text-4xl  font-bold text-primary mb-12 text-center">
+          {language === "EN" ? "Impressions Gallery" :  "Impressionen Galerie" }
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {images.map(({ src, alt }, index) => (
