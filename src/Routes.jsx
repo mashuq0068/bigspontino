@@ -10,9 +10,9 @@ import OurStoryUniverse from "pages/our-story-universe";
 import NotFound from "pages/NotFound";
 import ReservationExperience from "pages/reservation-experience";
 import Events from "pages/events";
-import Impressions from "pages/Impressions/Impression";
+import Impressions from "pages/Impressions";
 import MainLayout from "components/layout/MainLayout";
-import Jobs from "pages/Jobs/Jobs";
+import Jobs from "pages/Jobs";
 
 const Routes = () => {
   return (

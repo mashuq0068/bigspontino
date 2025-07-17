@@ -112,50 +112,7 @@ const Events = () => {
     publishDate: "July 15, 2025",
     readTime: 5,
   };
-  const highlights = [
-    {
-      image:
-        "https://www.reise-idee.de/wp-content/uploads/bergkaeserei_allgaeuer-bergbauernmuseum-1-1200x800.jpg",
-      title: {
-        EN: "Artisan Cheese Making",
-        DE: "Käseherstellung von Hand",
-        IT: "Produzione Artigianale di Formaggio",
-      },
-      text: {
-        EN: "Discover centuries-old traditions of Italian cheese making, passed down through generations.",
-        DE: "Entdecken Sie jahrhundertealte Traditionen der italienischen Käseherstellung.",
-        IT: "Scopri le tradizioni secolari della produzione di formaggio in Italia.",
-      },
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSXdhR8MdwJywTrAWcbhXzb6s9Aei5s-t0iA&",
-      title: {
-        EN: "Mediterranean Living",
-        DE: "Mediterraner Lebensstil",
-        IT: "Vivere Mediterraneo",
-      },
-      text: {
-        EN: "The slow-paced, outdoor lifestyle defines much of southern Italy’s charm.",
-        DE: "Der entspannte Lebensstil im Freien prägt den Charme Süditaliens.",
-        IT: "Lo stile di vita lento e all'aperto definisce il fascino del sud Italia.",
-      },
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTguNk55LFmndejQBr7pfhoZve-WM3GAaQkAQ&s",
-      title: {
-        EN: "Renaissance Heritage",
-        DE: "Renaissance-Erbe",
-        IT: "Eredità del Rinascimento",
-      },
-      text: {
-        EN: "Italy’s architecture and art preserve the soul of the Renaissance.",
-        DE: "Italiens Architektur und Kunst bewahren die Seele der Renaissance.",
-        IT: "L'architettura e l'arte italiane conservano l'anima del Rinascimento.",
-      },
-    },
-  ];
+
 
   const localizedFeatured = {
     ...mockFeaturedArticle,
