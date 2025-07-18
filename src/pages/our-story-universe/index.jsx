@@ -4,7 +4,7 @@ const OurStoryUniverse = () => {
   const [language, setLanguage] = useState('EN');
 
   useEffect(() => {
-    const lang = localStorage.getItem('lang');
+    const lang = localStorage.getItem('language');
     if (lang === 'DE' || lang === 'EN') setLanguage(lang);
   }, []);
 

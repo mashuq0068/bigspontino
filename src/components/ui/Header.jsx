@@ -161,7 +161,7 @@ const Header = () => {
           {/* Burger Icon for tablet & mobile */}
           <button
             onClick={toggleMenu}
-            className="p-2 rounded-md text-foreground hover:text-primary hover:bg-primary/5 transition-warm xl:hidden ml-3"
+            className="p-2 rounded-md z-50 text-foreground hover:text-primary hover:bg-primary/5 transition-warm xl:hidden ml-3"
             aria-label="Toggle menu"
           >
             <Icon
