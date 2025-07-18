@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Icon from '../../../components/AppIcon';
 import Image from '../../../components/AppImage';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const IngredientCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -9,6 +11,10 @@ const IngredientCarousel = () => {
   useEffect(() => {
     const savedLanguage = localStorage.getItem('language') || 'EN';
     setCurrentLanguage(savedLanguage);
+     AOS.init({
+    duration: 1000,
+   
+  });
   }, []);
 
   const ingredients = [
@@ -88,7 +94,7 @@ const IngredientCarousel = () => {
     <section className="py-16 lg:py-24 bg-gradient-tuscan">
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <div data-aos="fade-up" className="text-center mb-12">
           <h2 className="font-playfair text-3xl lg:text-4xl font-bold text-primary mb-4">
             {currentLanguage === 'EN' ? 'Our Ingredient Stories' : 'Unsere Zutaten-Geschichten'}
           </h2>
@@ -102,7 +108,7 @@ const IngredientCarousel = () => {
         <div className="relative">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Image Section */}
-            <div className="relative">
+            <div data-aos="zoom-in" className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-warm-lg">
                 <Image
                   src={currentIngredient.image}

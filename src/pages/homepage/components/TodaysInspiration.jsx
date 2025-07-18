@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
 import Image from '../../../components/AppImage';
 import Button from '../../../components/ui/Button';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 
 const TodaysInspiration = () => {
   const [currentLanguage, setCurrentLanguage] = useState('EN');
@@ -10,6 +13,10 @@ const TodaysInspiration = () => {
   useEffect(() => {
     const savedLanguage = localStorage.getItem('language') || 'EN';
     setCurrentLanguage(savedLanguage);
+     AOS.init({
+    duration: 1000,
+   
+  });
   }, []);
 
   const todaysSpecial = {
@@ -61,7 +68,7 @@ const TodaysInspiration = () => {
     <section className="py-16 lg:py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <div data-aos="fade-up" className="text-center mb-12">
           <div className="inline-flex items-center space-x-2 bg-accent/10 text-accent px-4 py-2 rounded-full mb-4">
             <Icon name="ChefHat" size={16} />
             <span className="text-sm font-medium">{content.subtitle}</span>
@@ -98,7 +105,7 @@ const TodaysInspiration = () => {
           </div>
 
           {/* Content Section */}
-          <div className="space-y-6">
+          <div data-aos="fade-left" className="space-y-6">
             <div>
               <h3 className="font-playfair text-2xl lg:text-3xl font-bold text-primary mb-2">
                 {content.dishName}

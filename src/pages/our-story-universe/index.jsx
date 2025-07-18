@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const OurStoryUniverse = () => {
   const [language, setLanguage] = useState('EN');
@@ -6,6 +8,7 @@ const OurStoryUniverse = () => {
   useEffect(() => {
     const lang = localStorage.getItem('language');
     if (lang === 'DE' || lang === 'EN') setLanguage(lang);
+    AOS.init({ duration: 1000});
   }, []);
 
   const content = {
@@ -30,13 +33,21 @@ Hier kann die mediterrane Lebensfreude am guten Genuss und guten Getränken sowi
   };
 
   return (
-    <section className="bg-[#f9f9f9]  py-16 px-4 md:px-10 font-serif">
-      <div className="max-w-3xl mx-auto">
+    <section className="bg-[#f9f9f9] py-16 px-4 md:px-10 font-serif">
+      <div className="max-w-3xl mx-auto" data-aos="fade-up">
         <h1 className="text-5xl font-bold mb-4 border-b-4 border-yellow-600 pb-2">
           {content[language].title}
         </h1>
-        <h2 className="text-2xl text-yellow-700 italic mb-8">{content[language].subtitle}</h2>
-        <p className="text-lg leading-relaxed whitespace-pre-line">{content[language].body}</p>
+        <h2 className="text-2xl text-yellow-700 italic mb-8" data-aos="fade-right">
+          {content[language].subtitle}
+        </h2>
+        <p
+          className="text-lg leading-relaxed whitespace-pre-line"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          {content[language].body}
+        </p>
       </div>
     </section>
   );
