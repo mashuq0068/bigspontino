@@ -38,7 +38,7 @@ const ContactMethods = () => {
     <div className="bg-background text-primary">
       {/* Contact Info Section */}
       <section className="py-16 px-6 md:px-12 bg-[#fffaf3]">
-        <div className="max-w-3xl mx-auto flex gap-36 justify-center">
+        <div className="max-w-3xl mx-auto flex md:flex-row flex-col gap-12 lg:gap-36 justify-center">
           {/* Contact Info */}
           <div>
             <h2 className="text-2xl font-bold mb-6">
