@@ -34,7 +34,7 @@ const OpeningHoursPill = () => {
   return (
     <div
       className={`
-        fixed top-4 z-50
+        absolute top-4 z-50
         right-1
         xl:right-3
         xl:left-auto

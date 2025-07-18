@@ -11,7 +11,6 @@ import OpeningHoursPill from "components/OpeningHoursPill";
 const Homepage = () => {
   return (
     <div className=" h-max bg-background">
-      <OpeningHoursPill />
 
       <main>
         <ReservationPopup />

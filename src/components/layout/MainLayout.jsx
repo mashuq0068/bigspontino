@@ -1,3 +1,4 @@
+import LanguageToggle from "components/LanguageToogle";
 import Header from "components/ui/Header";
 import React from "react";
 import { Outlet } from "react-router-dom";
@@ -5,10 +6,11 @@ import { Outlet } from "react-router-dom";
 const MainLayout = () => {
   return (
     <main>
-      
-        <Header />
-      <div className="">
-      </div>
+      <Header />
+      {/* Language Toggle Component */}
+      {/* This component allows users to switch between languages */}
+      <LanguageToggle />
+      <div className=""></div>
       <Outlet />
     </main>
   );
