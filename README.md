@@ -56,6 +56,7 @@ This project uses Tailwind CSS for styling. The configuration includes:
 - Container queries for component-specific responsive design
 - Fluid typography for responsive text
 - Animation utilities
+- Aos animation
 
 ## 📱 Responsive Design
 
