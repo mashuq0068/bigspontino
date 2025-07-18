@@ -6,17 +6,12 @@ A modern React-based project utilizing the latest frontend technologies and tool
 
 - **React 18** - React version with improved rendering and concurrent features
 - **Vite** - Lightning-fast build tool and development server
-- **Redux Toolkit** - State management with simplified Redux setup
 - **TailwindCSS** - Utility-first CSS framework with extensive customization
 - **React Router v6** - Declarative routing for React applications
-- **Data Visualization** - Integrated D3.js and Recharts for powerful data visualization
-- **Form Management** - React Hook Form for efficient form handling
-- **Animation** - Framer Motion for smooth UI animations
-- **Testing** - Jest and React Testing Library setup
 
 ## 📋 Prerequisites
 
-- Node.js (v14.x or higher)
+- Node.js
 - npm or yarn
 
 ## 🛠️ Installation
@@ -27,12 +22,9 @@ A modern React-based project utilizing the latest frontend technologies and tool
    # or
    yarn install
    ```
-   
 2. Start the development server:
    ```bash
-   npm start
-   # or
-   yarn start
+   npm run dev
    ```
 
 ## 📁 Project Structure
@@ -54,26 +46,6 @@ react_app/
 └── vite.config.js      # Vite configuration
 ```
 
-## 🧩 Adding Routes
-
-To add new routes to the application, update the `Routes.jsx` file:
-
-```jsx
-import { useRoutes } from "react-router-dom";
-import HomePage from "pages/HomePage";
-import AboutPage from "pages/AboutPage";
-
-const ProjectRoutes = () => {
-  let element = useRoutes([
-    { path: "/", element: <HomePage /> },
-    { path: "/about", element: <AboutPage /> },
-    // Add more routes as needed
-  ]);
-
-  return element;
-};
-```
-
 ## 🎨 Styling
 
 This project uses Tailwind CSS for styling. The configuration includes:
@@ -89,19 +61,12 @@ This project uses Tailwind CSS for styling. The configuration includes:
 
 The app is built with responsive design using Tailwind CSS breakpoints.
 
-
 ## 📦 Deployment
 
-Build the application for production:
+Build the application for production and deploy to vercel:
 
 ```bash
 npm run build
+vercel --prod
+
 ```
-
-## 🙏 Acknowledgments
-
-- Built with [Rocket.new](https://rocket.new)
-- Powered by React and Vite
-- Styled with Tailwind CSS
-
-Built with ❤️ on Rocket.new
